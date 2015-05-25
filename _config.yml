@@ -4,8 +4,10 @@ email: homeio@interia.eu
 description: > # this means to ignore newlines until "baseurl:"
   HomeIO is free, open source, universal system for remote monitor and control
   of various systems.
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://homeio.org.pl" # the base hostname & protocol for your site
+baseurl: ""
+url: "http://homeio.org.pl"
+links:
+  firmware: "https://github.com/HomeIO/homeio_firmware_arduino"
 twitter_username: bobik314
 github_username:  akwiatkowski
 
