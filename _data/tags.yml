@@ -1,0 +1,14 @@
+- slug: arduino
+  name: Arduino
+- slug: raspberry
+  name: Raspberry Pi
+- slug: deployment
+  name: Deployment
+- slug: tutorial
+  name: Tutorial
+- slug: hardware
+  name: Hardware
+- slug: software
+  name: Software
+- slug: wind
+  name: Wind energy

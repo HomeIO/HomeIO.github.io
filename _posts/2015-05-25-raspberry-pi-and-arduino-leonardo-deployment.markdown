@@ -3,7 +3,7 @@ layout: post
 title:  "How to deploy HomeIO on Raspberry Pi + Arduino Leonardo"
 date:   2015-05-25 15:18:59
 categories: tutorial
-tags: arduino raspberry deployment tutorial
+tags: [arduino, raspberry, deployment, tutorial, software, hardware]
 ---
 
 [arduino-leonardo]:             http://www.arduino.cc/en/Main/ArduinoBoardLeonardo
@@ -28,7 +28,7 @@ no problems with powering it. [More info here][arduino-leonardo].
 It is a good thing to buy proper _sensor shield_. It is an external board which you plug onto
 Arduino and allow it to connect multiple sensors very easily. [This board looks like this][arduino-leonardo-shield].
 
-TODO: add photos
+![Arduino Leonardo with sensor shield](/images/arduino_with_shield2.jpg)
 
 The server
 ----------

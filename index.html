@@ -4,6 +4,11 @@ layout: default
 
 <div class="home">
 
+  <p>
+    Hello. If you are new to HomeIO please check <a href="/about/2015/05/24/what-is-homeio.html/">what is HomeIO</a>
+    and later <a href="/tag/tutorial">tutorials</a>.
+  </p>
+
   <h1 class="page-heading">Posts</h1>
 
   <ul class="post-list">
@@ -11,9 +16,9 @@ layout: default
       <li>
         <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
-        <h2>
+        <h3>
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
+        </h3>
       </li>
     {% endfor %}
   </ul>
