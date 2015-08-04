@@ -12,3 +12,5 @@
   name: Software
 - slug: wind
   name: Wind energy
+- slug: news
+  name: News  

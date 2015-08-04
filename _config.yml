@@ -1,15 +1,39 @@
 # Site settings
 title: HomeIO
 email: homeio@interia.eu
-description: > # this means to ignore newlines until "baseurl:"
-  HomeIO is free, open source, universal system for remote monitor and control
-  of various systems.
-baseurl: ""
+description: "HomeIO is free, open source, universal system for remote monitor and control of various systems."
 url: "http://homeio.org.pl"
+author:
+  name: "Aleksander Kwiatkowski"
+  email: "homeio@interia.eu"
+  url: "http://homeio.org.pl"
+
+# Build settings
+baseurl: / # Change this to your relative path (ex: /blog/), or leave just a /
+markdown: kramdown
+source: .
+destination: ./_site
+permalink: /:title
+paginate: 8
+paginate_path: /page:num/
+
+# Default values
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# Custom variables
+version: "0.0.1"
 links:
   firmware: "https://github.com/HomeIO/homeio_firmware_arduino"
 twitter_username: bobik314
 github_username:  akwiatkowski
 
-# Build settings
-markdown: kramdown
+# Options
+custom_header: false
+custom_nav_footer: false
+reverse: false

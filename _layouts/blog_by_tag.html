@@ -1,7 +1,13 @@
 ---
 layout: default
 ---
-<h1>Articles by tag :{{ page.tag }}</h1>
+{% for data_tag in site.data.tags %}
+  {% if data_tag.slug == page.tag %}
+    {% assign tag = data_tag %}
+  {% endif %}
+{% endfor %}
+
+<h1>Articles by tag: {{ tag.name }}</h1>
 <div>
    <ul>
     {% if site.tags[page.tag] %}
