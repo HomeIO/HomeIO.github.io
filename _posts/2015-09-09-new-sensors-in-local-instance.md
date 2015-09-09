@@ -34,3 +34,4 @@ Measurements:
 * internal humidity - 45.2 %
 * external temperature - 13.3 &deg;C
 * external humidity - 69.5 %
+
