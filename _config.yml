@@ -1,39 +1,28 @@
-# Site settings
-title: HomeIO
-email: homeio@interia.eu
-description: "HomeIO is free, open source, universal system for remote monitor and control of various systems."
-url: "http://homeio.org.pl"
+permalink:           pretty
+
+# Setup
+title:               HomeIO
+tagline:             'an universal system for remote monitor and control'
+description:         "HomeIO is free, open source, universal system for remote monitor and control of various systems."
+url:                 http://homeio.org.pl
+baseurl:             ''
+paginate:            5
+
+# About/contact
 author:
-  name: "Aleksander Kwiatkowski"
-  email: "homeio@interia.eu"
-  url: "http://homeio.org.pl"
+  name:              Aleksander Kwiatkowski
+  url:               https://github.com/akwiatkowski
+  email:             homeio@interia.eu
 
-# Build settings
-baseurl: / # Change this to your relative path (ex: /blog/), or leave just a /
-markdown: kramdown
-source: .
-destination: ./_site
-permalink: /:title
-paginate: 8
-paginate_path: /page:num/
+# Custom vars
+version:             0.2.0
 
-# Default values
-defaults:
-  -
-    scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
+# Jekyll internals
+gems:
+- jekyll-paginate
 
-# Custom variables
-version: "0.0.1"
-links:
-  firmware: "https://github.com/HomeIO/homeio_firmware_arduino"
 twitter_username: bobik314
 github_username:  akwiatkowski
 
-# Options
-custom_header: false
-custom_nav_footer: false
-reverse: false
+github: https://github.com/HomeIO/
+github_firmware: "https://github.com/HomeIO/homeio_firmware_arduino"
