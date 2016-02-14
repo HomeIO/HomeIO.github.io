@@ -30,9 +30,3 @@ Sample image
 ------------
 
 ![Wind turbine statistics](/images/nc_addon_wind_stats.png)
-
-
-TODO
-----
-
-* fix interval rounding to use round (without round it `floor` value)
