@@ -17,8 +17,11 @@ There are some requirements your computer need to meet:
 * it has run on GNU/Linux or \*Nix
 * it has to be connected to *HomeIO hardware*, for example: [Arduino](/article/2015/05/25/raspberry-pi-and-arduino-leonardo-deployment/)
 
-Wind turbine instance when not performing store/restore whole buffer utilizes **only XX%**
+Wind turbine instance when not performing store/restore whole buffer utilizes **only 15%**
 of CPU.
+
+Imagine that it gets 10 types of measurements all every about 150ms and has lots of
+processing of them.
 
 ![Top on Raspberry Pi B](/images/rasp_wind_top_command.png)
 
