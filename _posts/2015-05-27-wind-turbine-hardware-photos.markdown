@@ -2,7 +2,7 @@
 layout: post
 title:  "Some photos of wind turbine hardware"
 date:   2015-05-27 12:00:00
-categories: wind-turbine
+categories: article
 tags: [wind, hardware]
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title:  "How to deploy HomeIO on Raspberry Pi + Arduino Leonardo"
 date:   2015-05-25 15:18:59
-categories: tutorial
+categories: article
 tags: [arduino, raspberry, deployment, tutorial, software, hardware]
 ---
 
@@ -36,7 +36,7 @@ The server
 You can use nearly every PC as a server for HomeIO. Keep in mind power usage. (There are also
 other requirements, but I can not specify them all)
 
-[Raspberry Pi][raspberry] has very low power usage and is powerful enough to allow 
+[Raspberry Pi][raspberry] has very low power usage and is powerful enough to allow
 HomeIO deployment. In this tutorial I will choose it as a server platform. If you have other PC
 everything should be similar.
 
@@ -186,7 +186,7 @@ It is only used in frontend to separate more important measurements from less on
 h->measTypeArray->add(m);
 ```
 
-Add measurement to fetchable measurement array. 
+Add measurement to fetchable measurement array.
 
 Is that all?
 ============

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Refactoring and clang"
+title:  "Refactoring and clang support"
 date:   2015-12-28 22:00:00
 categories: news
 tags: [software, news]

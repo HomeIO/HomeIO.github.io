@@ -2,7 +2,7 @@
 layout: post
 title:  "What is HomeIO"
 date:   2015-05-24 12:00:00
-categories: about
+categories: article
 tags: [software]
 ---
 
@@ -56,7 +56,7 @@ Where can it be used?
 ---------------------
 
 I use it with small wind turbine, and the second instance with plants
-to monitor soil moisture. 
+to monitor soil moisture.
 
 Wind turbine sample graph:
 
@@ -66,7 +66,7 @@ Plants sample graph:
 
 ![Multigraph sample](/images/homeio3.png)
 
-If you have questions possible usage feel free to ask via email. 
+If you have questions possible usage feel free to ask via email.
 
 
 How to start?
