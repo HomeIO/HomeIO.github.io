@@ -20,6 +20,7 @@ version:             0.2.0
 # Jekyll internals
 gems:
 - jekyll-paginate
+- jekyll-sitemap
 
 twitter_username: bobik314
 github_username:  akwiatkowski
