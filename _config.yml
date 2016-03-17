@@ -4,7 +4,7 @@ permalink:           pretty
 title:               HomeIO
 tagline:             'an universal system for remote monitor and control'
 description:         "HomeIO is free, open source, universal system for remote monitor and control of various systems."
-url:                 http://homeio.org.pl
+url:                 http://homeio.org
 baseurl:             ''
 paginate:            5
 
