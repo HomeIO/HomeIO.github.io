@@ -21,9 +21,10 @@ version:             0.2.0
 gems:
 - jekyll-paginate
 - jekyll-sitemap
+- jekyll-seo-tag
 
 twitter_username: bobik314
-github_username:  akwiatkowski
+github_username:  HomeIO
 
 github: https://github.com/HomeIO/
 github_firmware: "https://github.com/HomeIO/homeio_firmware_arduino"
