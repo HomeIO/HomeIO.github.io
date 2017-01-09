@@ -3,7 +3,7 @@ layout: post
 title:  "Scripting with ImageMagick. Mass resize and add watermark to photos."
 date:   2017-01-07 10:00:00
 categories: article
-tags: [software]
+tags: [linux, software]
 ---
 
 ImageMagick mass resize
