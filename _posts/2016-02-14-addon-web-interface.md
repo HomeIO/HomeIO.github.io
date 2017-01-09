@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Addon web interface"
+title:  "Addons web interface"
 date:   2016-02-14 15:00:00
 categories: news
-tags: [software, news]
+tags: [homeio, software, news]
 ---
 
 New tab

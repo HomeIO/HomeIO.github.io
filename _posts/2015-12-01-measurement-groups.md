@@ -3,7 +3,7 @@ layout: post
 title:  "Measurement groups"
 date:   2015-12-01 22:00:00
 categories: news
-tags: [software, news]
+tags: [homeio, software, news]
 ---
 
 What is measurement group?

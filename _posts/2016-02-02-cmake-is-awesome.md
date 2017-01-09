@@ -3,7 +3,7 @@ layout: post
 title:  "Cmake is awesome"
 date:   2016-02-02 22:00:00
 categories: news
-tags: [software, news]
+tags: [homeio, software, news]
 ---
 
 My friend told my about [`cmake`](https://cmake.org/) that it is his favourite

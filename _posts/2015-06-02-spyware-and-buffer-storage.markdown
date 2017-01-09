@@ -3,7 +3,7 @@ layout: post
 title:  "Spyware and buffer storage"
 date:   2015-06-02 12:00:00
 categories: news
-tags: [software, news]
+tags: [shomeio, oftware, news]
 ---
 
 I wanted to have something like centralized place to check measurement and if all instances are working.

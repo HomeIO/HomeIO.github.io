@@ -3,7 +3,7 @@ layout: post
 title:  "Some photos of wind turbine hardware"
 date:   2015-05-27 12:00:00
 categories: article
-tags: [wind, hardware]
+tags: [homeio, wind, hardware]
 ---
 
 [hardware]:             https://www.flickr.com/photos/32921659@N03/5090655232/

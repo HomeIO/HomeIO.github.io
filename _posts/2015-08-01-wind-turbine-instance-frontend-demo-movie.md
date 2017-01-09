@@ -3,7 +3,7 @@ layout: post
 title:  "Wind turbine instance frontend demo movie"
 date:   2015-08-01 12:00:00
 categories: news
-tags: [software, news]
+tags: [homeio, software, news]
 ---
 
 I wanted to show how wind turbine works with HomeIO, how can I control it, so I've recorded a simple demo.

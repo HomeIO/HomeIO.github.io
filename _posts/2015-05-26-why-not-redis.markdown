@@ -3,7 +3,7 @@ layout: post
 title:  "Why not Redis?"
 date:   2015-05-26 19:00:00
 categories: article
-tags: [software]
+tags: [homeio, software]
 ---
 
 [redis-list]:           http://redis.io/topics/data-types

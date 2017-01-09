@@ -3,7 +3,7 @@ layout: post
 title:  "Why you should use HomeIO?"
 date:   2016-03-03 12:00:00
 categories: article
-tags: [software, news]
+tags: [homeio, software, news]
 ---
 
 * [Low hardware requirements](#why1)

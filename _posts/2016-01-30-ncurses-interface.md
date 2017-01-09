@@ -3,7 +3,7 @@ layout: post
 title:  "Ncurses interface"
 date:   2016-01-30 22:00:00
 categories: news
-tags: [software, news]
+tags: [homeio, software, news]
 ---
 
 New interface

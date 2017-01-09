@@ -3,7 +3,7 @@ layout: post
 title:  "Wind turbine statistics addon is more pretty now"
 date:   2016-02-11 09:00:00
 categories: news
-tags: [software, news]
+tags: [homeio, software, news]
 ---
 
 A better one

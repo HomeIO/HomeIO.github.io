@@ -3,7 +3,7 @@ layout: post
 title:  "Proper HTTP requests in C++, makefile and small portion of fame on Nukomeet blog"
 date:   2015-08-04 12:00:00
 categories: news
-tags: [software, news]
+tags: [homeio, software, news]
 ---
 
 Fame

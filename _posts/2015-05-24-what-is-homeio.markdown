@@ -3,7 +3,7 @@ layout: post
 title:  "What is HomeIO"
 date:   2015-05-24 12:00:00
 categories: article
-tags: [software]
+tags: [homeio, software]
 ---
 
 [redis-list]:           http://redis.io/topics/data-types

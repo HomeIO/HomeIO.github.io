@@ -1,16 +1,29 @@
 - slug: arduino
   name: Arduino
+
 - slug: raspberry
   name: Raspberry Pi
+
 - slug: deployment
   name: Deployment
+
 - slug: tutorial
   name: Tutorial
+
 - slug: hardware
   name: Hardware
+
 - slug: software
   name: Software
+
 - slug: wind
   name: Wind energy
+
 - slug: news
-  name: News  
+  name: News
+
+- slug: homeio
+  name: HomeIO
+      
+- slug: linux
+  name: Linux

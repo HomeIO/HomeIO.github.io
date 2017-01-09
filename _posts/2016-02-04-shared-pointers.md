@@ -3,7 +3,7 @@ layout: post
 title:  "Shared pointers"
 date:   2016-02-04 22:00:00
 categories: news
-tags: [software, news]
+tags: [homeio, software, news]
 ---
 
 The best lazy solution to memory leak

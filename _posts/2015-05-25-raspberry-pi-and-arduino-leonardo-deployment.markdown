@@ -3,7 +3,7 @@ layout: post
 title:  "How to deploy HomeIO on Raspberry Pi + Arduino Leonardo"
 date:   2015-05-25 15:18:59
 categories: article
-tags: [arduino, raspberry, deployment, tutorial, software, hardware]
+tags: [homeio, arduino, raspberry, deployment, tutorial, software, hardware]
 ---
 
 [arduino-leonardo]:             http://www.arduino.cc/en/Main/ArduinoBoardLeonardo

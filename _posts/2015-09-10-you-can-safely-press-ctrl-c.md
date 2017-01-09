@@ -3,7 +3,7 @@ layout: post
 title:  "You can safely press CTRL+C"
 date:   2015-09-09 22:00:00
 categories: news
-tags: [software, news]
+tags: [homeio, software, news]
 ---
 
 Till this day pressing CTRL+C had some bad effects, now it's safe* to restart backend.
