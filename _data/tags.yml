@@ -24,6 +24,9 @@
 
 - slug: homeio
   name: HomeIO
-      
+
 - slug: linux
   name: Linux
+
+- slug: web
+  name: Web
