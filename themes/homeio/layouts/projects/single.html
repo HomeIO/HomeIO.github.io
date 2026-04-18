@@ -5,6 +5,9 @@
     <div class="post-meta">
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006 January 02" }}</time>
       <span class="reading-time">{{ .ReadingTime }} min read</span>
+      {{ with .Params.status }}
+        <span class="project-status project-status--{{ . }}">{{ . }}</span>
+      {{ end }}
       {{ with .Params.topics }}
         <span class="post-topics">
           {{ range . }}
@@ -13,6 +16,11 @@
         </span>
       {{ end }}
     </div>
+    {{ with .Params.tech }}
+      <div class="tech-stack">
+        {{ range . }}<span class="tech-badge">{{ . }}</span>{{ end }}
+      </div>
+    {{ end }}
   </header>
 
   <div class="post-content">

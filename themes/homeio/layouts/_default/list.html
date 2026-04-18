@@ -3,14 +3,16 @@
 {{ with .Content }}<div class="section-intro">{{ . }}</div>{{ end }}
 
 {{ range .Pages }}
-  <article class="post-preview">
+  {{ $firstTopic := "" }}
+  {{ with .Params.topics }}{{ $firstTopic = index . 0 }}{{ end }}
+  <article class="post-preview" {{ with $firstTopic }}data-topic="{{ . }}"{{ end }}>
     <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
     <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
     <p>{{ .Summary }}</p>
     {{ with .Params.topics }}
       <div class="post-topics">
         {{ range . }}
-          <a href="{{ "topics/" | absURL }}{{ . | urlize }}/" class="topic-badge">{{ . }}</a>
+          <a href="{{ "topics/" | absURL }}{{ . | urlize }}/" class="topic-badge" data-topic="{{ . }}">{{ . }}</a>
         {{ end }}
       </div>
     {{ end }}

@@ -1,0 +1,32 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ with .Content }}<div class="section-intro">{{ . }}</div>{{ end }}
+
+<div class="project-catalog">
+  {{ range .Pages }}
+    {{ $firstTopic := "" }}
+    {{ with .Params.topics }}{{ $firstTopic = index . 0 }}{{ end }}
+    <article class="project-card" {{ with $firstTopic }}data-topic="{{ . }}"{{ end }}>
+      <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+      <p>{{ .Description }}</p>
+      {{ with .Params.tech }}
+        <div class="tech-stack">
+          {{ range . }}<span class="tech-badge">{{ . }}</span>{{ end }}
+        </div>
+      {{ end }}
+      {{ with .Params.status }}
+        <span class="project-status project-status--{{ . }}">{{ . }}</span>
+      {{ end }}
+      {{ with .Params.topics }}
+        <div class="post-topics">
+          {{ range . }}
+            <a href="{{ "topics/" | absURL }}{{ . | urlize }}/" class="topic-badge" data-topic="{{ . }}">{{ . }}</a>
+          {{ end }}
+        </div>
+      {{ end }}
+    </article>
+  {{ else }}
+    <p>Projects coming soon.</p>
+  {{ end }}
+</div>
+{{ end }}

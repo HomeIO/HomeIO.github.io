@@ -3,7 +3,7 @@
 
 <div class="topic-grid">
   {{ range .Pages }}
-    <a href="{{ .Permalink }}" class="topic-card">
+    <a href="{{ .Permalink }}" class="topic-card" data-topic="{{ .Title | lower }}">
       <strong>{{ .Title }}</strong>
       <span>{{ len .Pages }} {{ if eq (len .Pages) 1 }}post{{ else }}posts{{ end }}</span>
     </a>

@@ -1,7 +1,7 @@
-# home.io — personal tech blog
+# homeio.org — personal tech blog
 baseURL = 'https://homeio.org/'
 locale = 'en-us'
-title = 'home.io'
+title = 'homeio.org'
 theme = 'homeio'
 
 # Content & rendering
@@ -31,6 +31,10 @@ enableRobotsTXT = true
     url = '/posts/'
     weight = 10
   [[menus.main]]
+    name = 'Projects'
+    url = '/projects/'
+    weight = 15
+  [[menus.main]]
     name = 'Topics'
     url = '/topics/'
     weight = 20
@@ -38,6 +42,18 @@ enableRobotsTXT = true
     name = 'About'
     url = '/about/'
     weight = 30
+
+# RSS — enable per-section and per-topic feeds
+[outputFormats]
+  [outputFormats.RSS]
+    mediatype = 'application/rss+xml'
+    baseName = 'feed'
+
+[outputs]
+  home = ['HTML', 'RSS']
+  section = ['HTML', 'RSS']
+  taxonomy = ['HTML', 'RSS']
+  term = ['HTML', 'RSS']
 
 # Parameters
 [params]
