@@ -1,0 +1,12 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+
+<div class="topic-grid">
+  {{ range .Pages }}
+    <a href="{{ .Permalink }}" class="topic-card">
+      <strong>{{ .Title }}</strong>
+      <span>{{ len .Pages }} {{ if eq (len .Pages) 1 }}post{{ else }}posts{{ end }}</span>
+    </a>
+  {{ end }}
+</div>
+{{ end }}

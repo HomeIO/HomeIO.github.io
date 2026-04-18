@@ -1,0 +1,6 @@
+name = "homeio"
+license = "MIT"
+description = "Minimal theme for home.io tech blog"
+
+[author]
+  name = "Olek"

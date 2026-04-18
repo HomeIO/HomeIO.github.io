@@ -1,0 +1,45 @@
+# home.io — personal tech blog
+baseURL = 'https://homeio.org/'
+locale = 'en-us'
+title = 'home.io'
+theme = 'homeio'
+
+# Content & rendering
+paginate = 10
+summaryLength = 40
+enableRobotsTXT = true
+
+# Taxonomies — topics are the primary way to organize content
+[taxonomies]
+  topic = 'topics'
+  tag = 'tags'
+
+# Syntax highlighting for code blocks
+[markup]
+  [markup.highlight]
+    style = 'dracula'
+    lineNos = false
+    guessSyntax = true
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # allow raw HTML in markdown (for embeds, charts)
+
+# Main navigation
+[menus]
+  [[menus.main]]
+    name = 'Blog'
+    url = '/posts/'
+    weight = 10
+  [[menus.main]]
+    name = 'Topics'
+    url = '/topics/'
+    weight = 20
+  [[menus.main]]
+    name = 'About'
+    url = '/about/'
+    weight = 30
+
+# Parameters
+[params]
+  description = 'Personal tech blog — energy, smart home, urban transport, and more'
+  author = 'Olek'

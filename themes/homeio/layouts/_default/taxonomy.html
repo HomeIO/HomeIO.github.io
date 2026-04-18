@@ -1,0 +1,12 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ with .Content }}<div class="section-intro">{{ . }}</div>{{ end }}
+
+{{ range .Pages }}
+  <article class="post-preview">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+    <p>{{ .Summary }}</p>
+  </article>
+{{ end }}
+{{ end }}
