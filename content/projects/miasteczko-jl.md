@@ -1,7 +1,7 @@
 ---
 title: 'Miasteczko.jl'
 date: 2026-04-18
-draft: true
+draft: false
 topics: ['urban transport']
 tags: ['simulation', 'optimization', 'gravity-model', 'public-transport', 'osm']
 tech: ['Julia', 'JuMP', 'React', 'TypeScript', 'MapLibre', 'Electron', 'Luxor.jl', 'Cairo']
@@ -43,6 +43,8 @@ Regional-scale simulation where vehicles (trains) are the agents, not people:
 6. **Junction transfers** — detect stations on 2+ corridors, route transfer demand through them with 5-minute penalty, align timetables at junctions
 
 Calibrated against Poland PBF to produce 3.8M daily passengers — intentionally optimistic for a green transport scenario.
+
+![MacroSim — 266 auto-discovered rail corridors across Poland, 2,987 settlements, 3,368 stations](/img/projects/miasteczko-jl/macrosim.png)
 
 ### Corridor discovery
 

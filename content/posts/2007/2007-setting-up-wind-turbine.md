@@ -1,7 +1,7 @@
 ---
 title: 'Setting Up a Wind Turbine'
 date: 2007-01-01
-draft: true
+draft: false
 topics: ['energy']
 tags: ['wind', 'renewable', 'diy']
 description: 'A cheap wind turbine, a homemade braking system, and a November storm that changed how I think about control systems.'
