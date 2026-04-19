@@ -1,4 +1,4 @@
-.PHONY: dev build new clean lint-css help
+.PHONY: dev build new clean lint-css deploy help
 
 HUGO := mise exec -- hugo
 
@@ -17,6 +17,10 @@ new:
 ## clean: remove build output
 clean:
 	rm -rf public/ resources/_gen/
+
+## deploy: push to GitHub Pages
+deploy:
+	git push origin master
 
 ## lint-css: validate CSS syntax
 lint-css:
