@@ -63,5 +63,5 @@ enableRobotsTXT = true
 
 # Parameters
 [params]
-  description = 'Personal tech blog — energy, smart home, urban transport, and more'
-  author = 'Olek'
+  description = 'Personal tech blog — energy, automation, sustainability'
+  author = 'Aleksander Kwiatkowski'
