@@ -1,4 +1,4 @@
-.PHONY: dev build new clean help
+.PHONY: dev build new clean lint-css help
 
 HUGO := mise exec -- hugo
 
@@ -17,6 +17,19 @@ new:
 ## clean: remove build output
 clean:
 	rm -rf public/ resources/_gen/
+
+## lint-css: validate CSS syntax
+lint-css:
+	@python3 -c "\
+	css = open('themes/homeio/static/css/style.css').read(); \
+	depth = 0; errors = []; \
+	for i, c in enumerate(css): \
+	    if c == '{': depth += 1; \
+	    elif c == '}': depth -= 1; \
+	    if depth < 0: errors.append(f'Unmatched }} at line {css[:i].count(chr(10))+1}'); break; \
+	if depth > 0: errors.append(f'Unclosed {{ — depth {depth} at end'); \
+	[print(f'ERROR: {e}') for e in errors] or print('CSS braces OK'); \
+	exit(1 if errors else 0)"
 
 ## help: show this help
 help:

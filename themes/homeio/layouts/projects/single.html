@@ -23,6 +23,10 @@
     {{ end }}
   </header>
 
+  {{ with .Params.description }}
+  <p class="section-intro">{{ . }}</p>
+  {{ end }}
+
   <div class="post-content">
     {{ .Content }}
   </div>

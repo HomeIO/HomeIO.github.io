@@ -5,6 +5,9 @@
 <meta name="description" content="{{ $desc }}">
 <title>{{ if not .IsHome }}{{ .Title }} — {{ end }}{{ site.Title }}</title>
 <link rel="stylesheet" href="{{ "css/fonts.css" | absURL }}">
+{{ if .Param "math" }}
+<link rel="stylesheet" href="{{ "vendor/katex/katex.min.css" | absURL }}">
+{{ end }}
 <link rel="stylesheet" href="{{ "css/style.css" | absURL }}">
 
 <!-- Open Graph -->
@@ -24,6 +27,13 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ .Title }}">
 <meta name="twitter:description" content="{{ $desc }}">
+
+<!-- KaTeX — client-side math rendering, loaded only on pages with math: true -->
+{{ if .Param "math" }}
+<script defer src="{{ "vendor/katex/katex.min.js" | absURL }}"></script>
+<script defer src="{{ "vendor/katex/contrib/auto-render.min.js" | absURL }}"
+  onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true},{left: '\\[', right: '\\]', display: true},{left: '\\(', right: '\\)', display: false}]});"></script>
+{{ end }}
 
 <!-- RSS autodiscovery -->
 {{ range .AlternativeOutputFormats }}
