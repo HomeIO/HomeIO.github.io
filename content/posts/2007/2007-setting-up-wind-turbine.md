@@ -1,6 +1,6 @@
 ---
 title: 'Setting Up a Wind Turbine'
-date: 2007-01-01
+date: 2007-11-09
 draft: false
 topics: ['energy']
 tags: ['wind', 'renewable', 'diy']
