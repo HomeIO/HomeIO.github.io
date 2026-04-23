@@ -239,6 +239,30 @@ main { flex: 1; padding: 2rem 0; }
 }
 
 /* ===== Single post ===== */
+/* Draft indicators — only visible locally with hugo -D */
+.draft-banner {
+  background: #dc2626;
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.75rem;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+.draft-mark {
+  background: #dc2626;
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.1rem 0.4rem;
+  vertical-align: middle;
+  margin-right: 0.25rem;
+}
+
 .post-header { margin-bottom: 2rem; }
 .post-header h1 {
   font-size: 1.85rem;

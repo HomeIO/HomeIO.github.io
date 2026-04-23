@@ -12,7 +12,7 @@
     {{ with .Params.topics }}{{ $firstTopic = index . 0 }}{{ end }}
     <article class="post-preview" {{ with $firstTopic }}data-topic="{{ . }}"{{ end }}>
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-      <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+      <h3><a href="{{ .Permalink }}">{{ if .Draft }}<span class="draft-mark">DRAFT</span> {{ end }}{{ .Title }}</a></h3>
       <p>{{ .Params.description }}</p>
       {{ with .Params.topics }}
         <div class="post-topics">
