@@ -1,7 +1,7 @@
 ---
 title: "Poland's grid at 46% renewable — what a year of 15-minute data reveals"
 date: 2026-04-20
-draft: true
+draft: false
 topics: ['energy']
 tags: ['energy', 'renewables', 'poland', 'data-analysis']
 description: 'I analyzed 365 days of Polish grid data at 15-minute resolution. Poland is already at 46% renewable share — and the data challenges several popular assumptions about intermittency, costs, and the optimal energy mix.'
