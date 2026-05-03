@@ -213,11 +213,51 @@ The initial Go rewrite was correct but slow — ~36 seconds for a cold run, only
 
 The warm run is now dominated by graph deserialization (~1 s) and A* routing (~0.04 s). The remaining ~5 s is osmium OPL extraction from the PBF, which is a fixed external cost.
 
-### Trade-offs
+### Test Route Details
 
-- **Memory**: the dense node index adds ~2 MB for a 500k-node graph (negligible)
-- **Cache invalidation**: old msgpack caches still load fine; the dense index is rebuilt on load
-- **Complexity**: parallel `PrepareWeights` adds ~30 lines; the dense index touches `graph/`, `router/`, and `cache/` but is isolated behind `BuildIndex()`
+All benchmarks use the same real-world test case:
+
+- **Start**: Włocławek, PL — `52.6482°N, 19.0672°E`
+- **End**: Toruń, PL — `53.0138°N, 18.5984°E`
+- **Distance**: ~60 km straight-line, ~62 km adventurous route
+- **OSM extract**: Poland PBF (1.9 GB), extracted to 27 MB OPL for the bbox `18.5°E–19.2°E, 52.5°N–53.1°N`
+- **Hardware**: Apple M4 Pro, macOS, Go 1.24
+- **Profile**: gravel, adventurousness 0.5
+
+### Detailed Timing Breakdown (Go optimized, warm run)
+
+| Stage | Time | % of total |
+|---|---|---|
+| OPL extraction (osmium) | ~0 s (cached) | 0% |
+| Graph deserialization | 1.0 s | 17% |
+| Weight preparation (parallel) | 4.5 s | 75% |
+| A* routing | 0.04 s | <1% |
+| Grid scoring | 1.5 s | 25% |
+| **Total warm** | **~6 s** | **100%** |
+
+The A* router explores ~130k nodes (26.6% of the 490k-node graph) to find the 62 km adventurous path. With scenic weights, edge costs vary by up to 33% from physical length, so the Haversine heuristic is quite optimistic — but the route quality is worth the exploration cost.
+
+### What the Go rewrite replaced
+
+| Component | Python | Go |
+|---|---|---|
+| Parser | Custom OPL parser | Same, rewritten |
+| Graph | NetworkX MultiDiGraph | Custom adjacency list + dense index |
+| Spatial index | Shapely STRtree | `tidwall/rtree` |
+| Cache | gzipped pickle (tile-level) | msgpack (bbox-level) |
+| Router | NetworkX A* | Custom A* with slice heap |
+| Webapp | Flask + ThreadPool | stdlib `net/http` + goroutine workers |
+| Binary size | — | ~7 MB single binary |
+| Tests | ~112 | **135** + 10 benchmarks |
+
+### What's next
+
+The remaining warm-run time is dominated by `PrepareWeights` (~4.5 s). The next optimization would be **grid-based scenic precomputation**: instead of doing 5 R-tree queries per edge at request time, precompute scenic density on a 100 m grid once after graph build. Edge weights become simple grid lookups. This would cut warm runs from ~6 s to ~2 s.
+
+Other possibilities:
+- Native Go PBF parser (eliminate 8 s osmium subprocess on cold runs)
+- Skip scenic weight prep entirely for base/shortest routes
+- k-d tree for nearest-node lookup (eliminates 490k-node linear scans)
 
 ## Summary
 
