@@ -127,7 +127,7 @@ Why does more wind help?
 - **Wind generates in winter** (23-26% CF when solar drops to 10-16%)
 - **Wind has lower ramp rates** (more predictable for grid operators)
 
-That said, the current 51/49 split is already in the flat zone of the efficiency curve. Poland doesn't need to radically rebalance — it needs *more* of both, especially wind, which the [10H distance rule]({{< ref "/posts/2026-04-20-10h-wind-law" >}}) has suppressed for a decade.
+That said, the current 51/49 split is already in the flat zone of the efficiency curve. Poland doesn't need to radically rebalance — it needs *more* of both, especially wind, which the 10H distance rule has suppressed for a decade.
 
 ## Finding 5: Poland imports from everyone
 
