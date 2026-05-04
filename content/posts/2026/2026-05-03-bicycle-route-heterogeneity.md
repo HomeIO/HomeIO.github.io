@@ -205,13 +205,15 @@ The initial Go rewrite was correct but slow — ~36 seconds for a cold run, only
 
 ### Results
 
-| | Python | Go (initial) | Go (optimized) |
-|---|---|---|---|
-| **Cold run** | 118 s | 36 s | **17 s** |
-| **Warm run** | 60 s | 25 s | **6 s** |
-| **Speedup** | 1× | 3× | **7–10×** |
+| | Python | Go (initial) | Go (after round 1) | Go (round 2) | **Go (today)** |
+|---|---|---|---|---|---|
+| **Cold run** | 121 s | 36 s | 17 s | 16 s | **37 s** |
+| **Warm run** | 60 s | 25 s | 6 s | 5 s | **2.9 s** |
+| **Speedup vs Python** | 1× | 3× | 7–10× | 7.5× cold, 12× warm | **3.3× cold, 21× warm** |
 
-The warm run is now dominated by graph deserialization (~1 s) and A* routing (~0.04 s). The remaining ~5 s is osmium OPL extraction from the PBF, which is a fixed external cost.
+*Cold run went from 16 s → 37 s because we moved from a tile-level msgpack cache to a bbox-level cache. The first cold run for a new bbox still needs osmium extraction (~29 s). This is expected — the win is on warm runs.*
+
+The warm run is now dominated by graph deserialization (~1 s) and weight preparation (~2.5 s). A* routing itself is ~40 ms — negligible.
 
 ### Test Route Details
 
@@ -224,18 +226,73 @@ All benchmarks use the same real-world test case:
 - **Hardware**: Apple M4 Pro, macOS, Go 1.24
 - **Profile**: gravel, adventurousness 0.5
 
-### Detailed Timing Breakdown (Go optimized, warm run)
+### Detailed Timing Breakdown (Go final, warm run)
 
 | Stage | Time | % of total |
 |---|---|---|
 | OPL extraction (osmium) | ~0 s (cached) | 0% |
-| Graph deserialization | 1.0 s | 17% |
-| Weight preparation (parallel) | 4.5 s | 75% |
-| A* routing | 0.04 s | <1% |
-| Grid scoring | 1.5 s | 25% |
-| **Total warm** | **~6 s** | **100%** |
+| Graph deserialization (msgpack) | 1.3 s | 45% |
+| Weighted graph cache load | 0.1 s | 3% |
+| A* routing | 0.04 s | 1% |
+| Output generation (GPX/GeoJSON/JSON) | 0.5 s | 17% |
+| Grid scoring + candidate generation | ~1.0 s | 34% |
+| **Total warm** | **~2.9 s** | **100%** |
+
+*Weighted graph cache skips `PrepareWeights` entirely on repeat requests. The 1.3 s msgpack deserialization is now the bottleneck.*
 
 The A* router explores ~130k nodes (26.6% of the 490k-node graph) to find the 62 km adventurous path. With scenic weights, edge costs vary by up to 33% from physical length, so the Haversine heuristic is quite optimistic — but the route quality is worth the exploration cost.
+
+### Optimization history
+
+**Round 1 — correctness + quick wins:**
+- Dense node index (`[]float64` gScore instead of `map[int64]float64`)
+- Parallel `PrepareWeights` (8 goroutines, 23 s → 4.5 s)
+- Precomputed A* heuristic (eliminates 300k+ repeated Haversine calls)
+- Cache key fix (bbox hash instead of temp file path)
+
+**Round 2 — three targeted optimizations:**
+
+1. **Grid-based scenic precomputation.** Instead of 5 R-tree queries per edge at request time (5M queries total), we precompute scenic density on a 100 m grid once after graph build. `PrepareWeights` becomes a single bilinear lookup per edge. Route quality impact: negligible — the adventurous route changed by only 40 m (60.16 km vs 60.20 km).
+
+2. **Skip scenic weights for base route.** When `adventurousness=0`, we skip `PrepareWeights` entirely and use `PenaltyWeight` (highway penalty only). In compare mode this saves the full weight-prep time for the base route.
+
+3. **Nearest-node R-tree.** `nearestNode()` was a linear scan over all 490k nodes. We now build a node R-tree in `BuildIndex()` and do an expanding-radius search. Cuts nearest-node time from ~0.2 s to ~1 ms.
+
+**Round 3 — caching layers + visualization:**
+
+4. **Route result cache.** Hash `(start_lat, start_lon, end_lat, end_lon, adventurousness, profile)` → cache all output files. Repeat queries: **<100 ms**. Invalidated when PBF or code changes.
+
+5. **Weighted graph cache.** Cache `edge.Weight` values after `PrepareWeights` (~9 MB msgpack). On hit, skip the entire 1.5 s scenic scoring step. Key includes graph hash + scoring params.
+
+6. **Bidirectional A*.** Search from both ends simultaneously. On a 490k-node graph: **2.2× faster** (66 ms → 30 ms per route). Added lazy `ReverseEdgeList` — only built when bidirectional search is actually used.
+
+7. **PNG candidate maps.** Each candidate route gets a static PNG map with base + adventurous + candidate overlay. Viewer shows "🗺️ View map" links per candidate.
+
+### The Native PBF Parser Experiment (What We Learned)
+
+We tried replacing the osmium subprocess with a native Go PBF parser using `github.com/paulmach/osm`. The parser worked for basic routing (~14 s, 2× faster than osmium) but **failed to extract scenic data**:
+
+| | Osmium (default) | Native Go PBF |
+|---|---|---|
+| Cold time | ~37 s | ~14 s |
+| Nature features | 28,428 | 0 |
+| Scenic points | 751 | 0 |
+| Cities/settlements | 1,004 | 0 |
+| Route quality | Full adventurous routing | Basic shortest path |
+
+**Why:** Osmium has a C++ spatial index that can look up any node by ID in O(1) when resolving way geometries. Go streaming parsers read the file sequentially — to find 100 nodes referenced by a way, they must scan all 235M nodes or do multiple passes. Extracting full scenic data (nature areas, POIs, cities) requires 3+ passes over a 1.9 GB file, which exceeds 5 minutes.
+
+**Decision:** Osmium stays as default. Native parser is available as `-native-pbf` for environments without osmium installed. For eliminating the subprocess, pre-extracting OPL once per region is the practical path.
+
+### The Profiling Lesson
+
+We added graph pruning (removing disconnected components) and `ReverseEdgeList` building to `BuildIndex()`, thinking they were "free" optimizations. Profiling revealed they added **2–3 seconds to every single run**:
+
+- Pruning BFS on 490k nodes: ~2 s per run
+- ReverseEdgeList scan over 1M edges: ~1 s per run
+- Combined: warm run went from 2.9 s → 5.5 s
+
+**Rule:** Never add O(n) or O(m) work to the hot path without measuring. Both were reverted. Pruning is only useful when building from raw OSM data (where disconnected ways exist), not when loading from a clean osmium extract.
 
 ### What the Go rewrite replaced
 
@@ -244,25 +301,26 @@ The A* router explores ~130k nodes (26.6% of the 490k-node graph) to find the 62
 | Parser | Custom OPL parser | Same, rewritten |
 | Graph | NetworkX MultiDiGraph | Custom adjacency list + dense index |
 | Spatial index | Shapely STRtree | `tidwall/rtree` |
-| Cache | gzipped pickle (tile-level) | msgpack (bbox-level) |
-| Router | NetworkX A* | Custom A* with slice heap |
+| Scenic scoring | Per-edge R-tree queries | 100 m precomputed grid + bilinear lookup |
+| Cache | gzipped pickle (tile-level) | msgpack (bbox-level) + route result cache + weighted graph cache |
+| Router | NetworkX A* | Custom A* + Bidirectional A* with slice heap |
+| Visualization | None | PNG per candidate, Leaflet viewer |
 | Webapp | Flask + ThreadPool | stdlib `net/http` + goroutine workers |
 | Binary size | — | ~7 MB single binary |
-| Tests | ~112 | **135** + 10 benchmarks |
+| Tests | ~112 | **138** + 10 benchmarks |
 
 ### What's next
 
-The remaining warm-run time is dominated by `PrepareWeights` (~4.5 s). The next optimization would be **grid-based scenic precomputation**: instead of doing 5 R-tree queries per edge at request time, precompute scenic density on a 100 m grid once after graph build. Edge weights become simple grid lookups. This would cut warm runs from ~6 s to ~2 s.
-
-Other possibilities:
-- Native Go PBF parser (eliminate 8 s osmium subprocess on cold runs)
-- Skip scenic weight prep entirely for base/shortest routes
-- k-d tree for nearest-node lookup (eliminates 490k-node linear scans)
+- **Bidirectional A* as default** — 2.2× routing speedup, zero overhead. Wire into CLI.
+- **Skip non-road ways during parse** — filter buildings/barriers during OPL build. Estimated 60% graph shrink.
+- **zstd compression for msgpack cache** — 220 MB → ~80 MB, faster I/O.
+- **WebSocket/SSE progress** — replace polling with server-sent events for real-time job progress.
+- **Native PBF parser** — available as `-native-pbf` for environments without osmium. Not default.
 
 ## Summary
 
 The core idea is simple: **interesting cycling happens at the boundaries between ecosystems**. By measuring nature heterogeneity from OSM data, turning it into a continuous density field, and letting the router flow through it like water through a watershed, we generate routes that are measurably more varied than shortest-path alternatives — without forcing artificial detours.
 
-The algorithm is fully offline (no APIs), runs in **~6 seconds on a warm cache** (was ~60 s in Python), and produces routes that cyclists actually want to ride.
+The algorithm is fully offline (no APIs), runs in **~2.9 seconds on a warm cache** (was ~60 s in Python), and produces routes that cyclists actually want to ride.
 
 <!-- TODO: screenshot — the "Plan a route" panel in viewer.html. Show red A marker, green B marker, the slider for adventurousness, and the loop-mode toggle. Caption: "Click anywhere on the map to set start (A) and end (B), then hit Generate." -->
