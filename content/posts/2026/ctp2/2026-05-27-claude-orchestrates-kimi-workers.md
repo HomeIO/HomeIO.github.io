@@ -2,7 +2,6 @@
 title: "Claude orchestrating a swarm of Kimi workers: a day of autonomous refactoring"
 linkTitle: "Refactoring Call to Power 2 with Claude and Kimi"
 date: 2026-05-27
-draft: true
 url: /posts/2026/2026-05-27-claude-orchestrates-kimi-workers/
 tags: ["agents", "ai-coding", "orchestration", "opencode", "kimi", "claude", "refactoring"]
 description: "What happens when you let one Claude session conduct eight opencode workers running Kimi K2.6 in parallel git worktrees. Notes from a single day that landed 61 commits, removed 17k lines, and ended with an autonomous loop merging diffs by itself."
