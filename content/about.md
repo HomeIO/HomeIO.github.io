@@ -1,9 +1,11 @@
 ---
 title: 'About'
+layout: about
+description: 'Notes from Aleksander Kwiatkowski on software, energy, and transport.'
 ---
 
-**home.io** is a personal tech blog where I document outcomes from my projects in energy systems, smart home automation, and urban transport.
+I’m Olek, a software engineer. My favorite part of a project is when the measurements don’t match what I expected. Then I have something to figure out.
 
-The focus is on results — data analysis, system design, and the things I learned along the way. I work with real-world data: power grid measurements, home automation telemetry, public transport feeds, and more.
+I’m especially interested in physics and energy. Away from the keyboard, I like cycling and photographing nature.
 
-Built with Hugo, deployed on GitHub Pages.
+I keep these notes because otherwise good ideas slip away. If you’re building something similar, maybe what I learned will save you some work.

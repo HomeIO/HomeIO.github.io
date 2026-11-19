@@ -1,32 +1,17 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
+<h1 id="projects-title" class="visually-hidden">{{ .Title }}</h1>
 {{ with .Content }}<div class="section-intro">{{ . }}</div>{{ end }}
 
-<div class="project-catalog">
+<section class="project-grid" aria-labelledby="projects-title">
   {{ range .Pages }}
-    {{ $firstTopic := "" }}
-    {{ with .Params.topics }}{{ $firstTopic = index . 0 }}{{ end }}
-    <article class="project-card" {{ with $firstTopic }}data-topic="{{ . }}"{{ end }}>
-      <h3><a href="{{ .Permalink }}">{{ if .Draft }}<span class="draft-mark">DRAFT</span> {{ end }}{{ .Title }}</a></h3>
-      <p>{{ .Description }}</p>
-      {{ with .Params.tech }}
-        <div class="tech-stack">
-          {{ range . }}<span class="tech-badge">{{ . }}</span>{{ end }}
-        </div>
-      {{ end }}
-      {{ with .Params.status }}
-        <span class="project-status project-status--{{ . }}">{{ . }}</span>
-      {{ end }}
-      {{ with .Params.topics }}
-        <div class="post-topics">
-          {{ range . }}
-            <a href="{{ "topics/" | absURL }}{{ . | urlize }}/" class="topic-badge" data-topic="{{ . }}">{{ . }}</a>
-          {{ end }}
-        </div>
-      {{ end }}
-    </article>
+  <article class="notebook-entry">
+    {{ $status := .Params.status }}
+    {{ if or $status .Draft }}<div class="notebook-meta">{{ with $status }}{{ . | humanize }}{{ end }}{{ if .Draft }}{{ if $status }} · {{ end }}Draft{{ end }}</div>{{ end }}
+    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+    {{ with .Description }}<p>{{ . }}</p>{{ end }}
+  </article>
   {{ else }}
-    <p>Projects coming soon.</p>
+  <p>No projects published yet.</p>
   {{ end }}
-</div>
+</section>
 {{ end }}

@@ -1,0 +1,2 @@
+{{- $names := dict "ai" "AI" "cpp" "C++" "gpu-compute" "GPU compute" "llm" "LLM" -}}
+{{- return (index $names (.Data.Term | urlize) | default (.LinkTitle | humanize)) -}}

@@ -1,44 +1,9 @@
 {{ define "main" }}
-<section class="hero">
-  <h1>homeio.org</h1>
-  <p class="hero-sub">Personal tech blog — energy systems, smart home, urban transport</p>
+<h1 class="notebook-intro">I build software and test ideas with data. I look for patterns in everyday life and wonder what we could do better.</h1>
+
+<section class="notebook-entries" aria-label="Recent posts">
+  {{ partial "notebook-entries.html" (first 5 (where site.RegularPages "Section" "posts").ByDate.Reverse) }}
 </section>
 
-<section class="recent-posts">
-  <h2>Recent posts</h2>
-  {{ $posts := where site.RegularPages "Section" "posts" }}
-  {{ range first 5 $posts }}
-    {{ $firstTopic := "" }}
-    {{ with .Params.topics }}{{ $firstTopic = index . 0 }}{{ end }}
-    <article class="post-preview" {{ with $firstTopic }}data-topic="{{ . }}"{{ end }}>
-      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-      <h3><a href="{{ .Permalink }}">{{ if .Draft }}<span class="draft-mark">DRAFT</span> {{ end }}{{ .Title }}</a></h3>
-      <p>{{ .Params.description }}</p>
-      {{ with .Params.topics }}
-        <div class="post-topics">
-          {{ range . }}
-            <a href="{{ "topics/" | absURL }}{{ . | urlize }}/" class="topic-badge" data-topic="{{ . }}">{{ . }}</a>
-          {{ end }}
-        </div>
-      {{ end }}
-    </article>
-  {{ else }}
-    <p>No posts yet. Stay tuned!</p>
-  {{ end }}
-</section>
-
-{{ $topics := site.Taxonomies.topics }}
-{{ if $topics }}
-<section class="topics-overview">
-  <h2>Topics</h2>
-  <div class="topic-grid">
-    {{ range $name, $pages := $topics }}
-      <a href="{{ "topics/" | absURL }}{{ $name | urlize }}/" class="topic-card" data-topic="{{ $name }}">
-        <strong>{{ $name | humanize | title }}</strong>
-        <span>{{ len $pages }} {{ if eq (len $pages) 1 }}post{{ else }}posts{{ end }}</span>
-      </a>
-    {{ end }}
-  </div>
-</section>
-{{ end }}
+{{ with site.GetPage "/posts" }}<a class="archive-link" href="{{ .RelPermalink }}">All blog posts</a>{{ end }}
 {{ end }}

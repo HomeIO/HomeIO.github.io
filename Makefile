@@ -25,7 +25,7 @@ deploy:
 ## lint-css: validate CSS syntax
 lint-css:
 	@python3 -c "\
-	css = open('themes/homeio/static/css/style.css').read(); \
+	css = open('themes/homeio/assets/css/style.css').read(); \
 	depth = 0; errors = []; \
 	for i, c in enumerate(css): \
 	    if c == '{': depth += 1; \

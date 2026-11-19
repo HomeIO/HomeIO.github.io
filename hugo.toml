@@ -33,10 +33,6 @@ enableRobotsTXT = true
 # Main navigation
 [menus]
   [[menus.main]]
-    name = 'Blog'
-    url = '/posts/'
-    weight = 10
-  [[menus.main]]
     name = 'Projects'
     url = '/projects/'
     weight = 15

@@ -1,10 +1,12 @@
 ---
 title: 'Mellum 2.1 12B, Flint 40B and Arete 27B: five small coding fixes'
+linkTitle: 'Mellum, Flint and Arete on five small coding fixes'
 date: 2026-11-13
 draft: false
 topics: ['ai', 'engineering']
 tags: ['llm', 'agents', 'ai-coding', 'benchmark', 'llama-cpp', 'self-hosting']
 description: 'I tested three self-hosted models on five small coding tasks from my own projects. Arete finished all five; Mellum was usually faster when it succeeded; Flint sometimes wrote correct code but failed to stop.'
+finding: 'Arete finished all five fixes; Flint wrote working code for four but stopped within the request limit on only two of those runs.'
 ---
 
 I wanted to know whether a local coding agent could handle small, well-defined

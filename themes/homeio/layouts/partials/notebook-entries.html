@@ -1,0 +1,10 @@
+{{ range . }}
+<article class="notebook-entry">
+  <div class="notebook-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>{{ if .Draft }} · Draft{{ end }}</div>
+  <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+  {{ $summary := .Params.finding | default .Description }}
+  {{ if and $summary (ne $summary .LinkTitle) }}<p>{{ $summary }}</p>{{ end }}
+</article>
+{{ else }}
+<p>No posts published yet.</p>
+{{ end }}

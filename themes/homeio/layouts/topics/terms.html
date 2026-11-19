@@ -1,0 +1,12 @@
+{{ define "main" }}
+<h1 id="topics-title" class="visually-hidden">{{ .Title }}</h1>
+<nav class="topic-directory" aria-labelledby="topics-title">
+  {{ range .Pages.ByTitle }}
+    {{ $count := len .Pages }}
+    <a href="{{ .RelPermalink }}">
+      <strong>{{ partial "topic-name.html" . }}</strong>
+      <span class="notebook-meta">{{ $count }} {{ if eq $count 1 }}entry{{ else }}entries{{ end }}</span>
+    </a>
+  {{ end }}
+</nav>
+{{ end }}

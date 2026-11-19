@@ -6,6 +6,7 @@ draft: false
 topics: ["engineering"]
 tags: ["ctp2", "retro-gaming", "refactoring", "macos"]
 description: "Three sessions, 615 turns, and no crashes: my first long campaign after refactoring Call to Power 2 felt like playing again."
+finding: "I saved and reloaded my campaign between three sessions on the macOS port and reached turn 615 without a crash."
 ---
 
 After refactoring my native macOS port of Call to Power 2, I finally sat down for my first long campaign. I did not have time for one long sitting, but over three sessions I reached the modern era. My latest regular save was at turn 615, in AD 2015.

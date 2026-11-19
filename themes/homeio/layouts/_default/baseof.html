@@ -3,7 +3,7 @@
 <head>
   {{ partial "head.html" . }}
 </head>
-<body>
+<body{{ if or .IsHome (eq .Layout "about") (and .IsSection (in (slice "posts" "projects") .Section)) (eq .Section "topics") }} class="notebook"{{ end }}>
   {{ partial "header.html" . }}
   <main class="container">
     {{ block "main" . }}{{ end }}

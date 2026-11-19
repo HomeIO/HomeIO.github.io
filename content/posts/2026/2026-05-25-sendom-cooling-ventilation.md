@@ -1,8 +1,10 @@
 ---
 title: "Cooling and Ventilation Strategies for a sendom.pl House — What the Sensors Reveal"
+linkTitle: "Cooling a Sendom house with windows and ventilation"
 date: 2026-05-25
 tags: ["energy", "ventilation", "thermal-modeling", "home-assistant", "sendom", "cooling", "heatwave"]
 description: "Real sensor data from a Sendom house near Poznań reveals which ventilation and cooling strategies actually work — from cross-ventilation events to heatwave simulations."
+finding: "With both bedroom windows open on a winter afternoon, the bedside sensor recorded a 5 °C drop while the sensor near the ceiling recorded only 1.2 °C."
 topics: ["energy", "home-automation"]
 math: true
 ---

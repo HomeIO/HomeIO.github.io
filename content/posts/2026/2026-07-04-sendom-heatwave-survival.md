@@ -1,9 +1,11 @@
 ---
 title: "How to Survive a Heatwave in a Sendom House: What 40 °C Taught Us"
+linkTitle: "Cooling a Sendom house through a heatwave"
 date: 2026-07-04
 draft: false
 tags: ["energy", "cooling", "hvac", "thermal-modeling", "home-assistant", "sendom", "climate-change"]
 description: "During the late-June 2026 heatwave we let the sensors run and treated a 40 °C weekend as a thermal stress test. The results: keeping cool cost less than a light bulb, the sun paid for most of it, and the cheapest fix for the hot bedroom isn't an air conditioner."
+finding: "Over 29 hours, the AC used 3.84 kWh to keep the living room at 23.4–24.1 °C while the uncooled bedroom reached 29.8 °C."
 topics: ["energy", "home-automation"]
 math: true
 ---

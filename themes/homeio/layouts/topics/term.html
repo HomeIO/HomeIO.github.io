@@ -1,0 +1,10 @@
+{{ define "main" }}
+<header class="topic-heading">
+  {{ with .Parent }}<a href="{{ .RelPermalink }}">All topics</a>{{ end }}
+  <h1 id="topic-title" class="notebook-intro">{{ partial "topic-name.html" . }}</h1>
+</header>
+{{ with .Content }}<div class="section-intro">{{ . }}</div>{{ end }}
+<section class="notebook-entries" aria-labelledby="topic-title">
+  {{ partial "notebook-entries.html" .Pages.ByDate.Reverse }}
+</section>
+{{ end }}
