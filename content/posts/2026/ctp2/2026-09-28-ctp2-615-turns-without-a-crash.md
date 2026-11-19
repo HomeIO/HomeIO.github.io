@@ -1,6 +1,7 @@
 ---
 title: "Call to Power 2: 615 turns without a crash"
 date: 2026-09-28T22:18:30+02:00
+url: /posts/2026/2026-09-28-ctp2-615-turns-without-a-crash/
 draft: false
 topics: ["engineering"]
 tags: ["ctp2", "retro-gaming", "refactoring", "macos"]
